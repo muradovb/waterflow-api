@@ -24,6 +24,10 @@ def populateData():
     values.append(data)
     return '''<h1>The received value is: {}</h1>'''.format(data)
 
+@app.routeRoot('/') #GET requests will be blocked
+def return():
+    return '''<h1>root{}</h1>'''
+
 #draws graph according to the input data
 @app.route('/line')
 def line():
