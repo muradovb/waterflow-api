@@ -49,6 +49,7 @@ def showDataJson():
     return jsonify(values)
 
 @app.route('/realtime-chart') 
+def showRealTime():
     return render_template('realtime.html')
           
 if __name__ == '__main__':
