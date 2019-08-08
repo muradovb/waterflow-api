@@ -47,7 +47,9 @@
       var mychart = document.getElementById("chart").getContext("2d");
       steps = 10
       max = {{ max }}
-      // draw bar chart
+      // draw chart
+      //const source = new EventSource("/chart-data");
+      
       var LineChartDemo = new Chart(mychart).Line(barData, {
         scaleOverride: true,
         scaleSteps: steps,
