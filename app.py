@@ -1,5 +1,7 @@
 from flask import Flask, Markup, render_template
 from flask import request
+from flask import jsonify
+
 app = Flask(__name__)
 
 
@@ -21,7 +23,10 @@ colors = [
 @app.route('/send-data') #GET requests will be blocked
 def populateData():
     data = request.args.get('data')
-    values.append(data)
+    if data<0
+         values.clear()
+    else
+         values.append(data)
     return '''<h1>The received value is: {}</h1>'''.format(data)
 
 #root
@@ -39,6 +44,11 @@ def line():
 @app.route('/show-data') #GET requests will be blocked
 def showData():
     return '''<h1>The received values are: {}</h1>'''.format(values)
+
+@app.route('/show-data-json') #GET requests will be blocked
+def showData():
+    return jsonify(values)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
