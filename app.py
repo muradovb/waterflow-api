@@ -35,7 +35,7 @@ def populateData():
         with open("values.txt", "a+") as f:
             f.write("%d " % data)
     #get the most recent value, return it as json: For realtime graph
-    return Response(jsonify(data), mimetype='text/event-stream')
+    return (jsonify(data), mimetype='text/event-stream')
 
 #root
 @app.route('/')
