@@ -48,8 +48,8 @@ def showData():
 def showDataJson():
     return jsonify(values)
 
-#@app.route('/realtime-chart') 
-#     render_template('realtime.html')
+@app.route('/realtime-chart') 
+    return render_template('realtime.html')
           
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
