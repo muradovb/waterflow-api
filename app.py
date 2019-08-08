@@ -26,7 +26,7 @@ def populateData():
          values.append(data)
     else:
          values.append(data)
-    return '''<h1>The received value is: {}</h1>'''.format(data)
+    return jsonify(values[-1])
 
 #root
 @app.route('/')
