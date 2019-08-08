@@ -35,7 +35,7 @@ def populateData():
         with open("values.txt", "a+") as f:
             f.write("%d " % data)
 
-    return jsonify(values[-1])
+    return jsonify(data)
 
 #root
 @app.route('/')
@@ -45,12 +45,20 @@ def returnRoot():
 #draws graph according to the input data
 @app.route('/line')
 def line():
+    values = []
+    with open("values.txt", "r") as f:
+        values = [int(x) for x in f.read().split()]
+
     line_labels=labels
-    line_values=values
+    line_values=values[-10:]
     return render_template('line_chart.html', title='WaterFlow Graph', max=3000, labels=line_labels, values=line_values)
 
 @app.route('/show-data') #GET requests will be blocked
 def showData():
+
+    values = []
+    with open("values.txt", "r") as f:
+        values = [int(x) for x in f.read().split()]
     return '''<h1>The received values are: {}</h1>'''.format(values)
 
 @app.route('/data-json') #GET requests will be blocked
