@@ -16,12 +16,12 @@ colors = [
           "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
 
 #endpoint to receive data 
-@app.route('/send-data') #GET requests will be blocked
+@app.route('/send-data')
 def populateData():
     data = int(request.args.get('data'))
     if(data<0):
          values.clear()
-    elif(values.size()>=10):
+    elif(values.size()>=10): #shift the graph
          values.pop(0)
          values.append(data)
     else:
@@ -29,7 +29,7 @@ def populateData():
     return '''<h1>The received value is: {}</h1>'''.format(data)
 
 #root
-@app.route('/') #GET requests will be blocked
+@app.route('/')
 def returnRoot():
     return '''<h1>root</h1>'''
 
