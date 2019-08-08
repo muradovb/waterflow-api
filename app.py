@@ -39,7 +39,7 @@ def returnRoot():
 def line():
     line_labels=labels
     line_values=values
-    return render_template('line_chart.html', title='WaterFlow Graph', max=15000, labels=line_labels, values=line_values)
+    return render_template('line_chart.html', title='WaterFlow Graph', max=3000, labels=line_labels, values=line_values)
 
 @app.route('/show-data') #GET requests will be blocked
 def showData():
