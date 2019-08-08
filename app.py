@@ -21,7 +21,7 @@ def populateData():
     data = int(request.args.get('data'))
     if(data<0):
          values.clear()
-    elif(values.size()>=10): #shift the graph
+    elif(len(values)>=10): #shift the graph
          values.pop(0)
          values.append(data)
     else:
