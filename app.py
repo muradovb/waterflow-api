@@ -19,13 +19,22 @@ colors = [
 @app.route('/send-data')
 def populateData():
     data = int(request.args.get('data'))
-    if(data<0):
-         values.clear()
-    elif(len(values)>=10): #shift the graph
-         values.pop(0)
-         values.append(data)
+    # if(data<0):
+    #      values.clear()
+    # elif(len(values)>=10): #shift the graph
+    #      values.pop(0)
+    #      values.append(data)
+    # else:
+    #      values.append(data)
+    # return jsonify(values[-1])
+
+    if (data < 0):
+        with open("values.txt", "w+") as f:
+            f.write("")
     else:
-         values.append(data)
+        with open("values.txt", "a+") as f:
+            f.write("%d " % data)
+
     return jsonify(values[-1])
 
 #root
@@ -46,6 +55,10 @@ def showData():
 
 @app.route('/data-json') #GET requests will be blocked
 def showDataJson():
+
+    values = []
+    with open("values.txt", "r") as f:
+        values = [int(x) for x in f.read().split()]
     return jsonify(values)
 
 @app.route('/realtime-chart') 
