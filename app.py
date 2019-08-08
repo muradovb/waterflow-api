@@ -5,11 +5,7 @@ from flask import jsonify
 app = Flask(__name__)
 
 
-labels = [
-          'JAN', 'FEB', 'MAR', 'APR',
-          'MAY', 'JUN', 'JUL', 'AUG',
-          'SEP', 'OCT', 'NOV', 'DEC'
-          ]
+labels = []
 
 #array to store values
 values = []
@@ -25,6 +21,9 @@ def populateData():
     data = int(request.args.get('data'))
     if(data<0):
          values.clear()
+    elif(values.size()>=10):
+         values.pop(0)
+         values.append(data)
     else:
          values.append(data)
     return '''<h1>The received value is: {}</h1>'''.format(data)
