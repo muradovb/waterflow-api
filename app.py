@@ -8,7 +8,7 @@ app = Flask(__name__)
 labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 #array to store values
-values = []
+# values = []
 
 colors = [
           "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
@@ -74,5 +74,10 @@ def showRealTime():
     return render_template('realtime.html')
           
 if __name__ == '__main__':
+
+    # create an empty file before everything
+    with open("values.txt", "w+") as f:
+        f.write("")
+
     app.run(host='0.0.0.0', port=8080)
 
