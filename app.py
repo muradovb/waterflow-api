@@ -41,7 +41,7 @@ def populateData():
     def generate():
        json_data = json.dumps({'value': data})
        yield f"data:{json_data}\n\n"
-       #time.sleep(0.5)
+       time.sleep(0.5)
 
     return Response(generate(), mimetype='text/event-stream')
 
