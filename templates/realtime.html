@@ -79,7 +79,7 @@
 
         source.onmessage = function (event) {
             const data = JSON.parse(event.data);
-            if (config.data.datasets[0].data.length === 20) {
+            if (config.data.datasets[0].data.length === 10) {
                 config.data.datasets[0].data.shift();
             }
             config.data.datasets[0].data.push(data.value);
