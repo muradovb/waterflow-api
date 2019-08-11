@@ -78,6 +78,7 @@
         const source = new EventSource("/send-data");
 
         source.onmessage = function (event) {
+            alert("Hello! I am an alert box!!");
             const data = JSON.parse(event.data);
             if (config.data.datasets[0].data.length === 10) {
                 config.data.datasets[0].data.shift();
