@@ -29,10 +29,10 @@ def populateData():
        data=int(data)
        if (data < 0):
            with open("values.txt", "w+") as f:
-           f.write("")
+               f.write("")
        else:
             with open("values.txt", "a+") as f:
-            f.write("%d " % data)
+               f.write("%d " % data)
     
 #     json_data = json.dumps({'value': data})
 #     sse.publish(json_data, type='graph')
