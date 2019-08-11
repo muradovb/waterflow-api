@@ -1,3 +1,5 @@
+import json
+import time
 from flask import Flask, Markup, render_template, Response
 from flask import request
 from flask import jsonify
@@ -19,23 +21,18 @@ colors = [
 @app.route('/send-data')
 def populateData():
     data = int(request.args.get('data'))
-    # if(data<0):
-    #      values.clear()
-    # elif(len(values)>=10): #shift the graph
-    #      values.pop(0)
-    #      values.append(data)
-    # else:
-    #      values.append(data)
-    # return jsonify(values[-1])
-
     if (data < 0):
         with open("values.txt", "w+") as f:
             f.write("")
     else:
         with open("values.txt", "a+") as f:
             f.write("%d " % data)
-    #get the most recent value, return it as json: For realtime graph
-    return jsonify(data)
+    def generate():
+       json_data = json.dumps({'value': data})
+       yield f"data:{json_data}\n\n"
+       time.sleep(0.5)
+
+   return Response(generate(), mimetype='text/event-stream')
 
 #root
 @app.route('/')
@@ -78,6 +75,6 @@ if __name__ == '__main__':
     # create an empty file before everything
     with open("values.txt", "w+") as f:
         f.write("")
-
-    app.run(host='0.0.0.0', port=8080)
+       
+    app.run(host='0.0.0.0', port=8080, threaded=True)
 
