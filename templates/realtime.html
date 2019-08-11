@@ -66,7 +66,7 @@
 //         }
 //       }, false);
 
-      var source = new EventSource("/send-data");
+      var source = new EventSource("waterflow-api.herokuapp.com/send-data");
       
       source.onmessage=function(event) {
           alert("received in js");
