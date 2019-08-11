@@ -69,7 +69,7 @@
       var source = new EventSource("/send-data");
       
       source.onmessage=function(event) {
-          alert("received in js");
+          //alert("received in js");
           const data = JSON.parse(event.data);
           if (barData.datasets[0].data.length === 10) {
               barData.datasets[0].data.shift();
