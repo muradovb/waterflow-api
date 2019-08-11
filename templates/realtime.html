@@ -53,30 +53,30 @@
         bezierCurve: false,
       });
 
-      //const source = new EventSource("/send-data");
-      // source.addEventListener('graph', function(event) {
-      //   var data = JSON.parse(event.data);
-      //   if (barData.datasets[0].data.length === 10) {
-      //           //config.data.labels.shift();
-      //           barData.datasets[0].data.shift();
-      //       }
-      //       //config.data.labels.push(data.time);
-      //       barData.datasets[0].data.push(parseInt(data.value));
-      //       LineChartDemo.update();
-      //   }
-      // }, false);
+      const source = new EventSource("/send-data");
+      source.addEventListener('graph', function(event) {
+        var data = JSON.parse(event.data);
+        if (barData.datasets[0].data.length === 10) {
+                //config.data.labels.shift();
+                barData.datasets[0].data.shift();
+            }
+            //config.data.labels.push(data.time);
+            barData.datasets[0].data.push(parseInt(data.value));
+            LineChartDemo.update();
+        }
+      }, false);
 
-      var source = new EventSource("/send-data");
+//       var source = new EventSource("/send-data");
       
-      source.onmessage=function(event) {
-          alert("received in js");
-          const data = JSON.parse(event.data);
-          if (barData.datasets[0].data.length === 10) {
-              barData.datasets[0].data.shift();
-          }
-          barData.datasets[0].data.push(parseInt(data.value));
-          LineChartDemo.update();
-      }
+//       source.onmessage=function(event) {
+//           alert("received in js");
+//           const data = JSON.parse(event.data);
+//           if (barData.datasets[0].data.length === 10) {
+//               barData.datasets[0].data.shift();
+//           }
+//           barData.datasets[0].data.push(parseInt(data.value));
+//           LineChartDemo.update();
+//       }
 
 
     </script>
