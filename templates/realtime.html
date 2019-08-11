@@ -66,7 +66,7 @@
 //         }
 //       }, false);
 
-      var source = new EventSource("/send-data?data");
+      var source = new EventSource("/send-data?data=");
       
       source.onmessage=function(event) {
           //alert("received in js");
