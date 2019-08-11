@@ -23,7 +23,6 @@ colors = [
 #endpoint to receive data 
 @app.route('/send-data')
 def populateData():
-    
     data = request.args.get('data')
     if(data!=None):
        data=int(data)
@@ -33,16 +32,10 @@ def populateData():
        else:
             with open("values.txt", "a+") as f:
                f.write("%d " % data)
-    
-#     json_data = json.dumps({'value': data})
-#     sse.publish(json_data, type='graph')
-
-#     return json_data
     def generate():
        json_data = json.dumps({'value': data})
        yield f"data:{json_data}\n\n"
        time.sleep(0.5)
-
     return Response(generate(), mimetype='text/event-stream')
 
 #root
