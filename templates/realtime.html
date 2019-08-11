@@ -71,6 +71,7 @@
       source.onmessage=function(event) {
           //alert("received in js");
           const data = JSON.parse(event.data);
+          console.log(data);
           if (barData.datasets[0].data.length === 10) {
               barData.datasets[0].data.shift();
           }
