@@ -23,12 +23,15 @@ colors = [
 #endpoint to receive data 
 @app.route('/send-data', methods=['GET'])
 def populateData():
-    data = int(request.args.get('data'))
-    if (data < 0):
-        with open("values.txt", "w+") as f:
-            f.write("")
-    else:
-        with open("values.txt", "a+") as f:
+    
+    data = request.args.get('data')
+    if(data!=None):
+       data=int(data)
+       if (data < 0):
+           with open("values.txt", "w+") as f:
+           f.write("")
+       else:
+            with open("values.txt", "a+") as f:
             f.write("%d " % data)
     
 #     json_data = json.dumps({'value': data})
