@@ -32,7 +32,7 @@ def populateData():
        yield f"data:{json_data}\n\n"
        time.sleep(0.5)
 
-   return Response(generate(), mimetype='text/event-stream')
+    return Response(generate(), mimetype='text/event-stream')
 
 #root
 @app.route('/')
