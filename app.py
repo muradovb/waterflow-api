@@ -3,8 +3,11 @@ import time
 from flask import Flask, Markup, render_template, Response
 from flask import request
 from flask import jsonify
+from flask_sse import sse
 
 app = Flask(__name__)
+app.config["REDIS_URL"] = "redis://localhost"
+app.register_blueprint(sse, url_prefix='/stream')
 
 
 labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
@@ -27,12 +30,17 @@ def populateData():
     else:
         with open("values.txt", "a+") as f:
             f.write("%d " % data)
-    def generate():
-       json_data = json.dumps({'value': data})
-       yield f"data:{json_data}\n\n"
-       time.sleep(0.5)
+    
+    json_data = json.dumps({'value': data})
+    sse.publish(json_data, type='graph')
 
-    return Response(generate(), mimetype='text/event-stream')
+    return json_data
+#     def generate():
+#        json_data = json.dumps({'value': data})
+#        yield f"data:{json_data}\n\n"
+#        time.sleep(0.5)
+
+#     return Response(generate(), mimetype='text/event-stream')
 
 #root
 @app.route('/')
