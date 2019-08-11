@@ -72,10 +72,8 @@
           alert("received in js");
           const data = JSON.parse(event.data);
           if (barData.datasets[0].data.length === 10) {
-              //config.data.labels.shift();
               barData.datasets[0].data.shift();
           }
-          //config.data.labels.push(data.time);
           barData.datasets[0].data.push(parseInt(data.value));
           LineChartDemo.update();
       }
