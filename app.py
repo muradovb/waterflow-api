@@ -21,7 +21,7 @@ colors = [
           "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
 
 #endpoint to receive data 
-@app.route('/send-data')
+@app.route('/send-data' methods=['GET'])
 def populateData():
     data = int(request.args.get('data'))
     if (data < 0):
