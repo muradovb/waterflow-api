@@ -1,92 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Creating Real-Time Charts with Flask</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <title>"graph"</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 </head>
+
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="canvas"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--suppress JSUnresolvedLibraryURL -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!--suppress JSUnresolvedLibraryURL -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!--suppress JSUnresolvedLibraryURL -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-<script>
-    $(document).ready(function () {
-        const config = {
-            type: 'line',
-            data: {
-                labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-                datasets: [{
-                    label: "Random Dataset",
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [],
-                    fill: false,
-                }],
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Creating Real-Time Charts with Flask'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Time'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Value'
-                        }
-                    }]
-                }
-            }
-        };
+  <center>
+    <h1>"WaterFlow Graph"</h1>
 
-        const context = document.getElementById('canvas').getContext('2d');
+    <canvas id="chart" width="600" height="400"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        datasets : [{
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : false,
+          data : []
+      }]}
+      Chart.defaults.global.animationSteps = 50;
+      Chart.defaults.global.tooltipYPadding = 16;
+      Chart.defaults.global.tooltipCornerRadius = 0;
+      Chart.defaults.global.tooltipTitleFontStyle = "normal";
+      Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+      Chart.defaults.global.animationEasing = "easeOutBounce";
+      Chart.defaults.global.responsive = true;
+      Chart.defaults.global.scaleLineColor = "black";
+      Chart.defaults.global.scaleFontSize = 16;
+      // get bar chart canvas
+      var mychart = document.getElementById("chart").getContext("2d");
+      steps = 10
+      max = 30
+      // draw chart
+      //const source = new EventSource("/chart-data");
 
-        const lineChart = new Chart(context, config);
+      var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+      });
 
-        const source = new EventSource("/send-data");
+//       const source = new EventSource("/send-data");
+//       source.addEventListener('graph', function(event) {
+//         var data = JSON.parse(event.data);
+//         if (barData.datasets[0].data.length === 10) {
+//                 //config.data.labels.shift();
+//                 barData.datasets[0].data.shift();
+//             }
+//             //config.data.labels.push(data.time);
+//             barData.datasets[0].data.push(parseInt(data.value));
+//             LineChartDemo.update();
+//         }
+//       }, false);
 
-        source.onmessage = function (event) {
-            alert("Hello! I am an alert box!!");
-            const data = JSON.parse(event.data);
-            if (config.data.datasets[0].data.length === 10) {
-                config.data.datasets[0].data.shift();
-            }
-            config.data.datasets[0].data.push(data.value);
-            lineChart.update();
-        }
-    });
-</script>
+      var source = new EventSource("/send-data");
+      
+      source.onmessage=function(event) {
+          alert("received in js");
+          const data = JSON.parse(event.data);
+          if (barData.datasets[0].data.length === 10) {
+              barData.datasets[0].data.shift();
+          }
+          barData.datasets[0].data.push(parseInt(data.value));
+          LineChartDemo.update();
+      }
+
+
+    </script>
+  </center>
 </body>
 </html>
