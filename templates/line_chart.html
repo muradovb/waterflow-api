@@ -35,18 +35,7 @@
               {{ item }},
             {% endfor %}]
           }
-	],
-	
-	options : {
-	      scales: {
-		yAxes: [{
-		  scaleLabel: {
-		    display: true,
-		    labelString: 'Flow Rate (l/min)'
-		  }
-		}]
-	      }
-	    }
+	]
       }
       Chart.defaults.global.animationSteps = 50;
       Chart.defaults.global.tooltipYPadding = 16;
@@ -64,25 +53,29 @@
       // draw chart
       //const source = new EventSource("/chart-data");
       
-      var LineChartDemo = new Chart(mychart).Line(barData, {
-        scaleOverride: true,
-        scaleSteps: steps,
-        scaleStepWidth: Math.ceil(max / steps),
-        scaleStartValue: 0,
-        scaleShowVerticalLines: true,
-        scaleShowGridLines : true,
-        barShowStroke : true,
-        scaleShowLabels: true,
-        bezierCurve: false,
-      	animation: false,
-  	scales: {
-    		yAxes: [{
-      			scaleLabel: {
-        		display: true,
-        		labelString: 'Liters Per Minute'
-      			}
-    		}]
-  	}     
+      var LineChartDemo = new Chart(mychart,			   
+      {
+		type: 'line',
+		data: barData, 
+		options: {
+		scaleOverride: true,
+		scaleSteps: steps,
+		scaleStepWidth: Math.ceil(max / steps),
+		scaleStartValue: 0,
+		scaleShowVerticalLines: true,
+		scaleShowGridLines : true,
+		barShowStroke : true,
+		scaleShowLabels: true,
+		bezierCurve: false,
+		animation: false,
+		scales: {
+			yAxes: [{
+				scaleLabel: {
+				display: true,
+				labelString: 'Flow Rate (l/min)'
+				}
+			}]
+		}     
       });
     </script>
   </center>
