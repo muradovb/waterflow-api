@@ -34,16 +34,7 @@
             {% endfor %}]
           }
 	]
-       options = {
-  		scales: {
-    		yAxes: [{
-      		scaleLabel: {
-        		display: true,
-        		labelString: 'Liters per Minute'
-      		}
-    		}]
-  		}     
-	}
+       
       }
       Chart.defaults.global.animationSteps = 50;
       Chart.defaults.global.tooltipYPadding = 16;
@@ -73,6 +64,16 @@
         scaleShowLabels: true,
         bezierCurve: false,
       	animation: false
+	options = {
+  		scales: {
+    		yAxes: [{
+      		scaleLabel: {
+        		display: true,
+        		labelString: 'Liters per Minute'
+      		}
+    		}]
+  		}     
+	}
       });
     </script>
   </center>
