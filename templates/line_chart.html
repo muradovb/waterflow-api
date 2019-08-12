@@ -35,8 +35,18 @@
               {{ item }},
             {% endfor %}]
           }
-	]
-       
+	],
+	
+	options : {
+	      scales: {
+		yAxes: [{
+		  scaleLabel: {
+		    display: true,
+		    labelString: 'Flow Rate (l/min)'
+		  }
+		}]
+	      }
+	    }
       }
       Chart.defaults.global.animationSteps = 50;
       Chart.defaults.global.tooltipYPadding = 16;
