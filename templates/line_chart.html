@@ -34,6 +34,22 @@
             {% endfor %}]
           }
 	]
+	scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'N-th'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Flow-Rate (L/m)'
+                        }
+                    }]
+                }
       }
       Chart.defaults.global.animationSteps = 50;
       Chart.defaults.global.tooltipYPadding = 16;
