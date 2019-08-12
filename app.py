@@ -11,7 +11,7 @@ app = Flask(__name__)
 #app.register_blueprint(sse, url_prefix='/stream')
 
 
-labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
 
 #array to store values
 # values = []
@@ -49,12 +49,15 @@ def returnRoot():
 @app.route('/line')
 def line():
     values = []
+    try:
     with open("values.txt", "r") as f:
         values = [int(x) for x in f.read().split()]
+    except Error as err:
+        print(err)
 
     line_labels=labels
-    line_values=values[-10:]
-    return render_template('line_chart.html', title='WaterFlow Graph', max=30, labels=line_labels, values=line_values)
+    line_values=values[-20:]
+    return render_template('line_chart.html', title='WaterFlow Graph', max=20, labels=line_labels, values=line_values)
 
 @app.route('/show-data') #GET requests will be blocked
 def showData():
