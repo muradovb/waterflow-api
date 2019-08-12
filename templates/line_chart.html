@@ -29,6 +29,7 @@
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(151,187,205,1)",
           bezierCurve : false,
+    
           data : [
 	    {% for item in values %}
               {{ item }},
@@ -64,16 +65,14 @@
         scaleShowLabels: true,
         bezierCurve: false,
       	animation: false,
-	options = {
-  		scales: {
+  	scales: {
     		yAxes: [{
       			scaleLabel: {
         		display: true,
         		labelString: 'Liters Per Minute'
       			}
     		}]
-  		}     
-	}
+  	}     
       });
     </script>
   </center>
