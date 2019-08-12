@@ -50,8 +50,8 @@ def returnRoot():
 def line():
     values = []
     try:
-    with open("values.txt", "r") as f:
-        values = [int(x) for x in f.read().split()]
+        with open("values.txt", "r") as f:
+            values = [int(x) for x in f.read().split()]
     except Error as err:
         print(err)
 
