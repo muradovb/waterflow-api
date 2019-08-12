@@ -34,22 +34,16 @@
             {% endfor %}]
           }
 	]
-	scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'N-th'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Flow-Rate (L/m)'
-                        }
-                    }]
-                }
+       options = {
+  		scales: {
+    		yAxes: [{
+      		scaleLabel: {
+        		display: true,
+        		labelString: 'Liters per Minute'
+      		}
+    		}]
+  		}     
+	}
       }
       Chart.defaults.global.animationSteps = 50;
       Chart.defaults.global.tooltipYPadding = 16;
@@ -60,6 +54,7 @@
       Chart.defaults.global.responsive = false;
       Chart.defaults.global.scaleLineColor = "black";
       Chart.defaults.global.scaleFontSize = 16;
+  
       // get bar chart canvas
       var mychart = document.getElementById("chart").getContext("2d");
       steps = 10
